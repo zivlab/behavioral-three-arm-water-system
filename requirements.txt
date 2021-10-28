@@ -1,0 +1,2 @@
+PyCmdMessenger==0.2.4
+pyserial==3.5
