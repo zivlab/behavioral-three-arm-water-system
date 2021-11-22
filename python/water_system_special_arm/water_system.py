@@ -61,7 +61,7 @@ class WaterSystem:
         self._send_command("probe")
         probe = self._receive_result()
         if probe is None or not (
-            probe[0] == "probe_result" and probe[1][0] == "water_system"
+            probe[0] == "probe_result" and probe[1][0] == "three_arm_water_system"
         ):
             raise ProbeMismatch(probe)
 

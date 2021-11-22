@@ -11,7 +11,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 import glob
 import serial
 
-from zivlab.water_system.water_system import WaterSystem, OPERATION_MODES
+from water_system import WaterSystem, OPERATION_MODES
 
 
 def command_reset_trace(water_system: WaterSystem):
