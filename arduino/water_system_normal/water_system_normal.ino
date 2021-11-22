@@ -15,7 +15,7 @@ void set_default_configuration(void) {
 void reset_system(void) {
   water_system.operation_mode = DIRECT_VALVE_CONTROL;
   water_system.current_reward_position = 0;
-  water_system.first_edge_visit = true;
+  water_system.previous_edge = -1;
 
   // Analog pin 3 is disconnected, thus providing random
   // values for the seed.
@@ -130,29 +130,21 @@ void read_beam_break_state(int beam_break_state[NUMBER_OF_REWARD_POSITIONS]) {
 // the mouse in either edge of the linear track.
 void operate_reward_dispensing() {
   int beam_break_state[NUMBER_OF_REWARD_POSITIONS] = {0};
-  bool is_mouse_in_edge = false;
 
   read_beam_break_state(beam_break_state);
   
   for (int i = 0; i < NUMBER_OF_REWARD_POSITIONS; i++) {
     if (beam_break_state[i] == LOW) {
       // Mouse is in position of reward
-      
-      if (water_system.first_edge_visit) {
+
+      if (water_system.previous_edge != i) {
         // Reward should be dispensed a single time while the mouse
         // remains in the same edge.
         dispense_reward(i);
-
-        water_system.first_edge_visit = false;
+        water_system.previous_edge = i;
       }
     }
-
-    // Mouse is in edge if either beam break is LOW (beam is broken)
-    is_mouse_in_edge |= !beam_break_state[i];
   }
-
-  // First edge visit if mouse is not in either edge
-  water_system.first_edge_visit = !is_mouse_in_edge;
 }
 
 void operate_alternating_reward_dispensing() {

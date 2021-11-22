@@ -46,8 +46,9 @@ struct {
 
   float baseline_beam_break_value[NUMBER_OF_REWARD_POSITIONS];
 
-  // Controls single dispensing per edge visit in non-alternating mode
-  bool first_edge_visit;
+  // Records the previous edge visited by the mouse to not
+  // allow dispensing from the same edge twice in a row
+  int previous_edge;
   
   struct {
     // Ratio of phototransistor read values to consider

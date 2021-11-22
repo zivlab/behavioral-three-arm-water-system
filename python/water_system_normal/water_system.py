@@ -8,7 +8,7 @@ ARDUINO_BAUDRATE = 9600
 
 OPERATION_MODES = [
     "Direct valve control",
-    "Reward dispensing",
+    "Reward dispensing"
 ]
 
 ARDUINO_COMMANDS = [

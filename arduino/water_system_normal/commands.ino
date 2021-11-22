@@ -22,7 +22,7 @@ void set_operation_mode(void) {
   water_system.operation_mode = c.readBinArg<int>();
 
   water_system.current_reward_position = 0;
-  water_system.first_edge_visit = true;
+  water_system.previous_edge = -1;
 
   sample_beam_break_baseline();
 }
